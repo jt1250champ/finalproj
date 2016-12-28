@@ -20,8 +20,22 @@ public class Numbers{
 	return i;
     }
 
-    private static int convertFromBase10(){
-	return 1;
+    private static int convertFromBase10(int endbase, int num){
+	int finalNum = 0;
+	for (int i = highestPower(endbase, num); i >= 0; i --){
+	    int digit = 0;
+	    while (highestPower(endbase, num) == i){
+		if (num - Math.pow(endbase, i) >= 0){
+		    num -= Math.pow(endbase, i);
+		    digit ++;
+		}
+		else{
+		    i --;
+		}
+	    }
+	    finalNum += digit * (Math.pow(10, i));
+	}
+	return finalNum;
     }
 
     public static int convertBase(int startBase, int endBase, int num){
@@ -31,6 +45,7 @@ public class Numbers{
     public static void main(String[]args){
 	System.out.println(convertToBase10(2, 10000));
 	System.out.println(highestPower(2, 16));
+	System.out.println(convertFromBase10(2, 16));
     }
 	
 }
