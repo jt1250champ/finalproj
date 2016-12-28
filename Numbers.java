@@ -1,9 +1,11 @@
+import java.lang.Math.*;
+
 public class Numbers{
     private static int ConvertToBase10(int startbase, int num){
 	int baseTen = 0;
 	int i = 0;
 	while(num > 0){
-	    baseTen += (num % 10) * (startbase ^ i);
+	    baseTen += (num % 10) * (Math.pow(startbase, i));
 	    num = num / 10;
 	    i ++;
 	}
