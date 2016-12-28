@@ -1,7 +1,7 @@
 import java.lang.Math.*;
 
 public class Numbers{
-    private static int ConvertToBase10(int startbase, int num){
+    private static int convertToBase10(int startbase, int num){
 	int baseTen = 0;
 	int i = 0;
 	while(num > 0){
@@ -12,12 +12,25 @@ public class Numbers{
 	return baseTen;
     }
 
-    public static int ConvertBase(int startBase, int endBase, int num){
+    private static int highestPower(int endbase, int num){
+	int i = 0;
+	while(Math.pow(endbase, i) < num){
+	    i ++;
+	}
+	return i;
+    }
+
+    private static int convertFromBase10(){
+	return 1;
+    }
+
+    public static int convertBase(int startBase, int endBase, int num){
 	return 1;
     }
 
     public static void main(String[]args){
-	System.out.println(ConvertToBase10(2, 10000));
+	System.out.println(convertToBase10(2, 10000));
+	System.out.println(highestPower(2, 16));
     }
 	
 }
