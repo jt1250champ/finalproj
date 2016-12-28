@@ -14,10 +14,10 @@ public class Numbers{
 
     private static int highestPower(int endbase, int num){
 	int i = 0;
-	while(Math.pow(endbase, i) < num){
+	while(Math.pow(endbase, i) <= num){
 	    i ++;
 	}
-	return i;
+	return i - 1;
     }
 
     private static int convertFromBase10(int endbase, int num){
@@ -29,9 +29,6 @@ public class Numbers{
 		    num -= Math.pow(endbase, i);
 		    digit ++;
 		}
-		else{
-		    i --;
-		}
 	    }
 	    finalNum += digit * (Math.pow(10, i));
 	}
@@ -39,13 +36,16 @@ public class Numbers{
     }
 
     public static int convertBase(int startBase, int endBase, int num){
-	return 1;
+	int baseTen = convertToBase10(startBase, num);
+	return convertFromBase10(endBase, baseTen);
     }
 
     public static void main(String[]args){
-	System.out.println(convertToBase10(2, 10000));
-	System.out.println(highestPower(2, 16));
-	System.out.println(convertFromBase10(2, 16));
+	System.out.println(highestPower(10, 16));
+	System.out.println(convertFromBase10(10, 16));
+	System.out.println(convertBase(2, 10, 10000));
+	System.out.println(convertBase(10, 4, 16));
+	System.out.println(convertBase(2, 4, 10000));
     }
 	
 }
