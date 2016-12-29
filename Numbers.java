@@ -1,6 +1,7 @@
 import java.lang.Math.*;
 
 public class Numbers{
+    //converting the base stuff:
     private static int convertToBase10(int startbase, int num){
 	int baseTen = 0;
 	int i = 0;
@@ -40,12 +41,35 @@ public class Numbers{
 	return convertFromBase10(endBase, baseTen);
     }
 
+    //prime factorization stuff:
+    private static int largestFactor(int num){
+	for (int i = num - 1; i >= Math.sqrt(num); i --){
+	    if (num % i == 0){
+		return i;
+	    }
+	}
+	return 1;
+    }
+    /*
+    public static String primeFactorize(int num){
+	int largest = largestFactor(num);
+	int smallest = num / largest;
+	while (largest != 1){
+	    
+    }
+    */
+    
+    //tests:
     public static void main(String[]args){
+	//tests for converting base
 	System.out.println(highestPower(10, 16));
 	System.out.println(convertFromBase10(10, 16));
 	System.out.println(convertBase(2, 10, 10000));
 	System.out.println(convertBase(10, 4, 16));
 	System.out.println(convertBase(2, 4, 10000));
+
+	//tests for prime factorizing
+	System.out.println(largestFactor(10));
     }
 	
 }
