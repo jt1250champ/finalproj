@@ -1,4 +1,5 @@
 import java.lang.Math.*;
+import java.util.ArrayList;
 
 public class Numbers{
     //converting the base stuff:
@@ -50,14 +51,37 @@ public class Numbers{
 	}
 	return 1;
     }
-    /*
+    
     public static String primeFactorize(int num){
+	String factor = "";
 	int largest = largestFactor(num);
 	int smallest = num / largest;
+	ArrayList<String> primes = new ArrayList<String>();
+	if (largest == 1){
+	    primes.add("" + num);
+	}
 	while (largest != 1){
-	    
+	    primes.add("" + smallest);
+	    smallest = largest / largestFactor(largest);
+	    if (largestFactor(largest) ==  1){
+		primes.add("" + largest);
+	    }
+	    largest = largestFactor(largest);
+	}
+	for (int i = 0; i < primes.size(); i ++){
+	    String prime = primes.get(i);
+	    int pow = 0;
+	    while (i < primes.size() && (primes.get(i)).equals(prime)){
+		pow ++;
+		i ++;
+	    }
+	    factor = factor + prime + "^" + pow + " * ";
+	    i --;
+	}
+	factor = factor.substring(0, factor.length() - 3);
+	return factor;
     }
-    */
+    
     
     //tests:
     public static void main(String[]args){
@@ -70,6 +94,9 @@ public class Numbers{
 
 	//tests for prime factorizing
 	System.out.println(largestFactor(10));
+	System.out.println(primeFactorize(10));
+	System.out.println(primeFactorize(96));
+	System.out.println(primeFactorize(97));
     }
 	
 }
