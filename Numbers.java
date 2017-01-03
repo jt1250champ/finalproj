@@ -37,7 +37,10 @@ public class Numbers{
 	return finalNum;
     }
 
-    public static int convertBase(int startBase, int endBase, int num){
+    public static int convertBase(String startbase, String endbase, String n){
+	int startBase = Integer.parseInt(startbase);
+	int endBase = Integer.parseInt(endbase);
+	int num = Integer.parseInt(n);
 	int baseTen = convertToBase10(startBase, num);
 	return convertFromBase10(endBase, baseTen);
     }
@@ -52,7 +55,8 @@ public class Numbers{
 	return 1;
     }
     
-    public static String primeFactorize(int num){
+    public static String primeFactorize(String n){
+	int num = Integer.parseInt(n);
 	String factor = "";
 	int largest = largestFactor(num);
 	int smallest = num / largest;
@@ -88,15 +92,15 @@ public class Numbers{
 	//tests for converting base
 	System.out.println(highestPower(10, 16));
 	System.out.println(convertFromBase10(10, 16));
-	System.out.println(convertBase(2, 10, 10000));
-	System.out.println(convertBase(10, 4, 16));
-	System.out.println(convertBase(2, 4, 10000));
+	System.out.println(convertBase("2", "10", "10000"));
+	System.out.println(convertBase("10", "4", "16"));
+	System.out.println(convertBase("2", "4", "10000"));
 
 	//tests for prime factorizing
 	System.out.println(largestFactor(10));
-	System.out.println(primeFactorize(10));
-	System.out.println(primeFactorize(96));
-	System.out.println(primeFactorize(97));
+	System.out.println(primeFactorize("10"));
+	System.out.println(primeFactorize("96"));
+	System.out.println(primeFactorize("97"));
     }
 	
 }
