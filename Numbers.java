@@ -13,7 +13,7 @@ public class Numbers extends JFrame implements ActionListener{
 
     public Numbers() {
 	this.setTitle("TODO: Pineapple");
-	this.setSize(600,400);
+	this.setSize(600,200);
 	this.setLocation(100,100);
 	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -27,6 +27,9 @@ public class Numbers extends JFrame implements ActionListener{
 	pane.add(intro);
 	pane.add(userInput);
 	pane.add(ent);
+	pane.add(tester);
+
+	userInput.setMaximumSize(new Dimension(600, 30));
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -121,10 +124,43 @@ public class Numbers extends JFrame implements ActionListener{
 	factor = factor.substring(0, factor.length() - 3);
 	return factor;
     }
+
+    public static String add(int[] nums) {
+	int sum = 0;
+	for(int i = 0; i < nums.length; i++) {
+	    sum += nums[i];
+	}
+	return "" + sum;
+	
+    }
+    //TODO change this to use add so you can use an array
+    public static String subtract(int x, int y) {
+	int sum = x - y;
+	return "" + sum;
+	
+    }
+
+    public static String multiply(int[] nums) {
+	int product = 0;
+	for(int i = 0; i < nums.length; i++) {
+	    product *= nums[i];
+	}
+	return "" + product;
+	
+    }
+
+    //TODO change this to use multiply
+    public static String divide(double x, double y) {
+	double product = (double)x /(double)y;
+	return "" + product;
+	
+    }
     
     public static void main(String[]args){
 	Numbers g = new Numbers();
 	g.setVisible(true);
+	int[] arr = {1, 2, 3};
+	System.out.println(add(arr));
     }
 	
 }
