@@ -1,7 +1,43 @@
 import java.lang.Math.*;
 import java.util.ArrayList;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
-public class Numbers{
+public class Numbers extends JFrame implements ActionListener{
+    private Container pane;
+    private JLabel name = new JLabel("Pineapple");
+    private JLabel intro = new JLabel("TODO: abcdefghijklmnopqrstuvwxyz");
+    private JTextField userInput = new JTextField(10);
+    private JLabel tester = new JLabel();
+
+    public Numbers() {
+	this.setTitle("TODO: Pineapple");
+	this.setSize(600,400);
+	this.setLocation(100,100);
+	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+	pane = this.getContentPane();
+	pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
+	//TODO MAKE KEYBOARD SHORTCUT WORK
+	JButton ent = new JButton("Enter");
+	ent.addActionListener(this);
+	ent.setActionCommand("Start");
+	pane.add(name);
+	pane.add(intro);
+	pane.add(userInput);
+	pane.add(ent);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+	String event = e.getActionCommand();
+	if(event.equals("Start")) {
+	    String s = userInput.getText();
+	    s += "dsifhosduifhsd";
+	    tester.setText(s);
+	}
+    }
+
     //converting the base stuff:
     private static int convertToBase10(int startbase, int num){
 	int baseTen = 0;
@@ -86,21 +122,9 @@ public class Numbers{
 	return factor;
     }
     
-    
-    //tests:
     public static void main(String[]args){
-	//tests for converting base
-	System.out.println(highestPower(10, 16));
-	System.out.println(convertFromBase10(10, 16));
-	System.out.println(convertBase("2", "10", "10000"));
-	System.out.println(convertBase("10", "4", "16"));
-	System.out.println(convertBase("2", "4", "10000"));
-
-	//tests for prime factorizing
-	System.out.println(largestFactor(10));
-	System.out.println(primeFactorize("10"));
-	System.out.println(primeFactorize("96"));
-	System.out.println(primeFactorize("97"));
+	Numbers g = new Numbers();
+	g.setVisible(true);
     }
 	
 }
