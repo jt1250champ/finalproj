@@ -6,13 +6,13 @@ import java.awt.event.*;
 
 public class Numbers extends JFrame implements ActionListener{
     private Container pane;
-    private JLabel name = new JLabel("Pineapple");
-    private JLabel intro = new JLabel("TODO: abcdefghijklmnopqrstuvwxyz");
+    private JLabel name = new JLabel("Wolfram Alpha");
+    private JLabel intro = new JLabel("Enter what you want to calculate or know about:");
     private JTextField userInput = new JTextField(10);
     private JLabel tester = new JLabel();
 
     public Numbers() {
-	this.setTitle("TODO: Pineapple");
+	this.setTitle("Wolfram Alpha");
 	this.setSize(600,200);
 	this.setLocation(100,100);
 	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -35,9 +35,12 @@ public class Numbers extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 	String event = e.getActionCommand();
 	if(event.equals("Start")) {
-	    String s = userInput.getText();
-	    s += "dsifhosduifhsd";
-	    tester.setText(s);
+	    String x = userInput.getText();
+	    String s = x.substring(0,15);
+	    String n = s.substring(16,x.length());
+	    if(s.equals("prime factorize")) {                    
+	        tester.setText(primeFactorize(n));
+	    }
 	}
     }
 
@@ -159,8 +162,6 @@ public class Numbers extends JFrame implements ActionListener{
     public static void main(String[]args){
 	Numbers g = new Numbers();
 	g.setVisible(true);
-	int[] arr = {1, 2, 3};
-	System.out.println(add(arr));
     }
 	
 }
