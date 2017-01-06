@@ -13,7 +13,7 @@ public class Numbers extends JFrame implements ActionListener{
 
     public Numbers() {
 	this.setTitle("Wolfram Alpha");
-	this.setSize(600,200);
+	this.setSize(500,120);
 	this.setLocation(100,100);
 	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -36,11 +36,12 @@ public class Numbers extends JFrame implements ActionListener{
 	String event = e.getActionCommand();
 	if(event.equals("Start")) {
 	    String x = userInput.getText();
-	    String s = x.substring(0,15);
-	    String n = s.substring(16,x.length());
-	    if(s.equals("prime factorize")) {                    
-	        tester.setText(primeFactorize(n));
-	    }
+	    //String s = x.substring(0,15);
+	    //String n = x.substring(16,x.length());
+	    //if(s.equals("prime factorize")) {                    
+	    //tester.setText(primeFactorize(n));
+	    //}
+	    arithmetic(x);
 	}
     }
 
@@ -128,8 +129,8 @@ public class Numbers extends JFrame implements ActionListener{
 	return factor;
     }
 
-    public static String add(int[] nums) {
-	int sum = 0;
+    public static String add(double[] nums) {
+	double sum = 0;
 	for(int i = 0; i < nums.length; i++) {
 	    sum += nums[i];
 	}
@@ -143,8 +144,8 @@ public class Numbers extends JFrame implements ActionListener{
 	
     }
 
-    public static String multiply(int[] nums) {
-	int product = 0;
+    public static String multiply(double[] nums) {
+	double product = 0;
 	for(int i = 0; i < nums.length; i++) {
 	    product *= nums[i];
 	}
@@ -153,10 +154,33 @@ public class Numbers extends JFrame implements ActionListener{
     }
 
     //TODO change this to use multiply
-    public static String divide(double x, double y) {
+    public static String divide(String x, String y) {
 	double product = (double)x /(double)y;
 	return "" + product;
 	
+    }
+
+    public static String arithmetic(String expression) {
+        String[] terms = expression.split("\\s+");
+	//TODO right now its assuming that ~ 1 + 4 / 9 - 2 * 9
+        for(int i = 0; i < terms.length; i++) {
+	    if(terms[i].equals("*")) {
+		double[] nums = {(double)terms[i-1],(double)terms[i+1]};
+		multiply(nums);
+	    }
+	    else if(terms[i].equals("/")) {
+		divide(terms[i-1],terms[i+1]);
+	    }
+	}
+	for(int i = 0; i < terms.length; i++) {
+	    if(terms[i].equals("+")) {
+		double[] nums = {(double)terms[i-1],(double)terms[i+1]};
+		add(nums);
+	    }
+	    else if(terms[i].equals("-")) {
+		subtract(terms[i-1],terms[i+1]);
+	    }
+	}
     }
     
     public static void main(String[]args){
