@@ -41,7 +41,7 @@ public class Numbers extends JFrame implements ActionListener{
 	    //if(s.equals("prime factorize")) {                    
 	    //tester.setText(primeFactorize(n));
 	    //}
-	    arithmetic(x);
+	    tester.setText(arithmetic(x));
 	}
     }
 
@@ -138,14 +138,16 @@ public class Numbers extends JFrame implements ActionListener{
 	
     }
     //TODO change this to use add so you can use an array
-    public static String subtract(int x, int y) {
-	int sum = x - y;
+    public static String subtract(String x, String y) {
+	double num1 = Double.parseDouble(x);
+	double num2 = Double.parseDouble(y);
+	double sum = num1 - num2;
 	return "" + sum;
 	
     }
 
     public static String multiply(double[] nums) {
-	double product = 0;
+	double product = 1;
 	for(int i = 0; i < nums.length; i++) {
 	    product *= nums[i];
 	}
@@ -155,32 +157,41 @@ public class Numbers extends JFrame implements ActionListener{
 
     //TODO change this to use multiply
     public static String divide(String x, String y) {
-	double product = (double)x /(double)y;
+	double num1 = Double.parseDouble(x);
+	double num2 = Double.parseDouble(y);
+	double product = num1 / num2;
 	return "" + product;
 	
     }
 
     public static String arithmetic(String expression) {
+	String ans = "";
         String[] terms = expression.split("\\s+");
 	//TODO right now its assuming that ~ 1 + 4 / 9 - 2 * 9
+	System.out.println(terms[0]);
+		System.out.println(terms[1]);
+			System.out.println(terms[2]);
+			System.out.println(terms[3]);
+			System.out.println(terms[4]);
         for(int i = 0; i < terms.length; i++) {
 	    if(terms[i].equals("*")) {
-		double[] nums = {(double)terms[i-1],(double)terms[i+1]};
-		multiply(nums);
+		double[] nums = {Double.parseDouble(terms[i-1]),Double.parseDouble(terms[i+1])};
+		ans = multiply(nums);
 	    }
 	    else if(terms[i].equals("/")) {
-		divide(terms[i-1],terms[i+1]);
+	    	ans = divide(terms[i-1],terms[i+1]);
 	    }
 	}
 	for(int i = 0; i < terms.length; i++) {
 	    if(terms[i].equals("+")) {
-		double[] nums = {(double)terms[i-1],(double)terms[i+1]};
-		add(nums);
+		double[] nums = {Double.parseDouble(terms[i-1]),Double.parseDouble(terms[i+1])};
+		ans = add(nums);
 	    }
 	    else if(terms[i].equals("-")) {
-		subtract(terms[i-1],terms[i+1]);
+		ans = subtract(terms[i-1],terms[i+1]);
 	    }
 	}
+	return "" + ans;
     }
     
     public static void main(String[]args){
