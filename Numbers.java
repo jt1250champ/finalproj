@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Numbers extends JFrame implements ActionListener{//KeyListener
+public class Numbers extends JFrame implements ActionListener, KeyListener{
     private Container pane;
     private JLabel name = new JLabel("Wolfram Alpha");
     private JLabel intro = new JLabel("Enter what you want to calculate or know about:");
@@ -21,8 +21,9 @@ public class Numbers extends JFrame implements ActionListener{//KeyListener
 	pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
 	//TODO MAKE KEYBOARD SHORTCUT WORK
 	JButton ent = new JButton("Enter");
+        getRootPane().setDefaultButton(ent);
+	ent.addKeyListener(this);
 	ent.addActionListener(this);
-	//	ent.addKeyListener(this);
 	ent.setActionCommand("Start");
 	pane.add(name);
 	pane.add(intro);
@@ -32,38 +33,31 @@ public class Numbers extends JFrame implements ActionListener{//KeyListener
 
 	userInput.setMaximumSize(new Dimension(600, 30));
     }
-    /*
-    @Override
+
+    //TODO NOt working yet; no boo
+    
     public void keyPressed(KeyEvent e) {
 	if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 	    System.out.println("Boo");
 	}
     }
 
-    @Override
     public void keyReleased(KeyEvent e) {
 
     }
 
-    @Override
     public void keyTyped(KeyEvent e) {
 	
     }
-    */
 
     public void actionPerformed(ActionEvent e) {
 	String event = e.getActionCommand();
 	if(event.equals("Start")) {
 	    String x = userInput.getText();
-	    //String s = x.substring(0,15);
-	    //String n = x.substring(16,x.length());
-	    //if(s.equals("prime factorize")) {                    
-	    //tester.setText(primeFactorize(n));
-	    //}
 	    tester.setText(arithmetic(x));
 	}
     }
-
+    
     //converting the base stuff:
     private static int convertToBase10(int startbase, int num){
 	int baseTen = 0;
@@ -186,12 +180,10 @@ public class Numbers extends JFrame implements ActionListener{//KeyListener
     public static String arithmetic(String expression) {
         String[] terms = expression.split("\\s+");
 	//TODO right now its assuming that ~ 1 + 4 / 9 - 2 * 9
+	//for some reason not working when its just num op num
+	//TODO parens and stuff
+	//TODO order of ops
 	double soFar = Double.parseDouble(terms[0]);
-	System.out.println(terms[0]);
-		System.out.println(terms[1]);
-			System.out.println(terms[2]);
-			System.out.println(terms[3]);
-			System.out.println(terms[4]);
         for(int i = 0; i < terms.length; i++) {
 	    if(terms[i].equals("*")) {
 		double[] nums = {soFar, Double.parseDouble(terms[i+1])};
@@ -212,7 +204,6 @@ public class Numbers extends JFrame implements ActionListener{//KeyListener
 	}
 	return "" + soFar;
     }
-
     
     public static void main(String[]args){
 	Numbers g = new Numbers();
