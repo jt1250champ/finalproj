@@ -1,10 +1,11 @@
 import java.lang.Math.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Numbers extends JFrame implements ActionListener, KeyListener{
+public class Numbers extends JFrame implements ActionListener{
     private Container pane;
     private JLabel name = new JLabel("Wolfram Alpha");
     private JLabel intro = new JLabel("Enter what you want to calculate or know about:");
@@ -22,7 +23,6 @@ public class Numbers extends JFrame implements ActionListener, KeyListener{
 	//TODO MAKE KEYBOARD SHORTCUT WORK
 	JButton ent = new JButton("Enter");
         getRootPane().setDefaultButton(ent);
-	ent.addKeyListener(this);
 	ent.addActionListener(this);
 	ent.setActionCommand("Start");
 	pane.add(name);
@@ -34,27 +34,11 @@ public class Numbers extends JFrame implements ActionListener, KeyListener{
 	userInput.setMaximumSize(new Dimension(600, 30));
     }
 
-    //TODO NOt working yet; no boo
-    
-    public void keyPressed(KeyEvent e) {
-	if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-	    System.out.println("Boo");
-	}
-    }
-
-    public void keyReleased(KeyEvent e) {
-
-    }
-
-    public void keyTyped(KeyEvent e) {
-	
-    }
-
     public void actionPerformed(ActionEvent e) {
 	String event = e.getActionCommand();
 	if(event.equals("Start")) {
 	    String x = userInput.getText();
-	    tester.setText(arithmetic(x));
+	    tester.setText(poly(x));
 	}
     }
     
@@ -204,10 +188,68 @@ public class Numbers extends JFrame implements ActionListener, KeyListener{
 	}
 	return "" + soFar;
     }
+    //need a program to get int[] coeffs
+    //remember to add 0s
+
+    //degree of polynomial 
+    public static String degree(int[] coeffs) {
+	//3x^2 + 3x + 4 -> [3,3,4] length of 3
+	int d = coeffs.length - 1;
+	return "" + d;
+    }
+
+    public String poly(String x) {
+	Scanner s = new Scanner(x);
+	System.out.println(s.nextInt());
+	int[] f = {1, 2, 3};
+	int[] g = {2, 3, 4};
+	return addPoly(f, g);
+    }
+
+    //so far only works if theyre even in length
+    public static String addPoly(int[] f, int[] g) {
+	int[] h = new int[f.length];
+	String ans = "";
+	for(int i = 0; i < f.length; i++) {
+	    h[i] = f[i] + g[i];
+	}
+	for(int j = 0; j < h.length; j++) {
+	    int power = Integer.parseInt(degree(h)) - j;
+	    if(power != 0) {
+		 ans += h[j] + "x^" + power;
+	    }else {
+		ans += h[j];
+	    }
+	   
+	}
+	return ans;
+    }
+
+    public static String subPoly(int[] f, int[] g) {
+	int[] h = new int[f.length];
+	String ans = "";
+	for(int i = 0; i < f.length; i++) {
+	    h[i] = f[i] - g[i];
+	}
+	for(int j = 0; j < h.length; j++) {
+	    int power = Integer.parseInt(degree(h)) - j;
+	    if(power != 0) {
+		 ans += h[j] + "x^" + power;
+	    }else {
+		ans += h[j];
+	    }
+	   
+	}
+	return ans;
+    }
     
     public static void main(String[]args){
 	Numbers g = new Numbers();
 	g.setVisible(true);
+
+	int[] a = {1, 2};
+	int[] b = {2, 3};
+	System.out.println(addPoly(a, b));
     }
 	
 }
