@@ -165,9 +165,9 @@ public class Numbers extends JFrame implements ActionListener{
     }
 
     public static String arithmetic(String expression) {
-	String ans = "";
         String[] terms = expression.split("\\s+");
 	//TODO right now its assuming that ~ 1 + 4 / 9 - 2 * 9
+	double soFar = Double.parseDouble(terms[0]);
 	System.out.println(terms[0]);
 		System.out.println(terms[1]);
 			System.out.println(terms[2]);
@@ -175,23 +175,23 @@ public class Numbers extends JFrame implements ActionListener{
 			System.out.println(terms[4]);
         for(int i = 0; i < terms.length; i++) {
 	    if(terms[i].equals("*")) {
-		double[] nums = {Double.parseDouble(terms[i-1]),Double.parseDouble(terms[i+1])};
-		ans = multiply(nums);
+		double[] nums = {soFar, Double.parseDouble(terms[i+1])};
+		soFar = Double.parseDouble(multiply(nums));
 	    }
 	    else if(terms[i].equals("/")) {
-	    	ans = divide(terms[i-1],terms[i+1]);
+	    	soFar = Double.parseDouble(divide("" + soFar, terms[i+1]));
 	    }
 	}
 	for(int i = 0; i < terms.length; i++) {
 	    if(terms[i].equals("+")) {
-		double[] nums = {Double.parseDouble(terms[i-1]),Double.parseDouble(terms[i+1])};
-		ans = add(nums);
+		double[] nums = {soFar,Double.parseDouble(terms[i+1])};
+		soFar =  Double.parseDouble(add(nums));
 	    }
 	    else if(terms[i].equals("-")) {
-		ans = subtract(terms[i-1],terms[i+1]);
+		soFar = Double.parseDouble(subtract("" + soFar, terms[i+1]));
 	    }
 	}
-	return "" + ans;
+	return "" + soFar;
     }
     
     public static void main(String[]args){
