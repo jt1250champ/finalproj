@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Numbers extends JFrame implements ActionListener{
+public class Numbers extends JFrame implements ActionListener{//KeyListener
     private Container pane;
     private JLabel name = new JLabel("Wolfram Alpha");
     private JLabel intro = new JLabel("Enter what you want to calculate or know about:");
@@ -13,8 +13,8 @@ public class Numbers extends JFrame implements ActionListener{
 
     public Numbers() {
 	this.setTitle("Wolfram Alpha");
-	this.setSize(500,120);
-	this.setLocation(100,100);
+	this.setSize(500,250);
+	this.setLocation(250,250);
 	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 	pane = this.getContentPane();
@@ -22,6 +22,7 @@ public class Numbers extends JFrame implements ActionListener{
 	//TODO MAKE KEYBOARD SHORTCUT WORK
 	JButton ent = new JButton("Enter");
 	ent.addActionListener(this);
+	//	ent.addKeyListener(this);
 	ent.setActionCommand("Start");
 	pane.add(name);
 	pane.add(intro);
@@ -31,6 +32,24 @@ public class Numbers extends JFrame implements ActionListener{
 
 	userInput.setMaximumSize(new Dimension(600, 30));
     }
+    /*
+    @Override
+    public void keyPressed(KeyEvent e) {
+	if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+	    System.out.println("Boo");
+	}
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+	
+    }
+    */
 
     public void actionPerformed(ActionEvent e) {
 	String event = e.getActionCommand();
@@ -193,6 +212,7 @@ public class Numbers extends JFrame implements ActionListener{
 	}
 	return "" + soFar;
     }
+
     
     public static void main(String[]args){
 	Numbers g = new Numbers();
