@@ -5,42 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Numbers extends JFrame implements ActionListener{
-    private Container pane;
-    private JLabel name = new JLabel("Wolfram Alpha");
-    private JLabel intro = new JLabel("Enter what you want to calculate or know about:");
-    private JTextField userInput = new JTextField(10);
-    private JLabel tester = new JLabel();
-
-    public Numbers() {
-	this.setTitle("Wolfram Alpha");
-	this.setSize(500,250);
-	this.setLocation(250,250);
-	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-	pane = this.getContentPane();
-	pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
-	//TODO MAKE KEYBOARD SHORTCUT WORK
-	JButton ent = new JButton("Enter");
-        getRootPane().setDefaultButton(ent);
-	ent.addActionListener(this);
-	ent.setActionCommand("Start");
-	pane.add(name);
-	pane.add(intro);
-	pane.add(userInput);
-	pane.add(ent);
-	pane.add(tester);
-
-	userInput.setMaximumSize(new Dimension(600, 30));
-    }
-
-    public void actionPerformed(ActionEvent e) {
-	String event = e.getActionCommand();
-	if(event.equals("Start")) {
-	    String x = userInput.getText();
-	    tester.setText(poly(x));
-	}
-    }
+public class Numbers {
     
     //converting the base stuff:
     private static int convertToBase10(int startbase, int num){
@@ -207,6 +172,7 @@ public class Numbers extends JFrame implements ActionListener{
     }
 
     //so far only works if theyre even in length
+    //todo make the - thing better like instead of + -1 itll just be -1
     public static String addPoly(int[] f, int[] g) {
 	int[] h = new int[f.length];
 	String ans = "";
@@ -219,6 +185,9 @@ public class Numbers extends JFrame implements ActionListener{
 		 ans += h[j] + "x^" + power;
 	    }else {
 		ans += h[j];
+	    }
+	    if(j+1 < h.length) {
+		ans += " + ";
 	    }
 	   
 	}
@@ -233,23 +202,17 @@ public class Numbers extends JFrame implements ActionListener{
 	}
 	for(int j = 0; j < h.length; j++) {
 	    int power = Integer.parseInt(degree(h)) - j;
-	    if(power != 0) {
-		 ans += h[j] + "x^" + power;
-	    }else {
+	    if(power == 0) {
 		ans += h[j];
+	    }else {
+		ans += h[j] + "x^" + power;
 	    }
-	   
+	    if(j+1 < h.length) {
+		ans += " + ";
+	    }
 	}
-	return ans;
-    }
-    
-    public static void main(String[]args){
-	Numbers g = new Numbers();
-	g.setVisible(true);
-
-	int[] a = {1, 2};
-	int[] b = {2, 3};
-	System.out.println(addPoly(a, b));
-    }
 	
+	return ans;
+	
+    }	
 }
