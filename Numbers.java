@@ -42,12 +42,12 @@ public class Numbers {
 	return finalNum;
     }
 
-    public static int convertBase(String startbase, String endbase, String n){
+    public static String convertBase(String startbase, String endbase, String n){
 	int startBase = Integer.parseInt(startbase);
 	int endBase = Integer.parseInt(endbase);
 	int num = Integer.parseInt(n);
 	int baseTen = convertToBase10(startBase, num);
-	return convertFromBase10(endBase, baseTen);
+	return "" + convertFromBase10(endBase, baseTen);
     }
 
     //prime factorization stuff:
@@ -135,11 +135,11 @@ public class Numbers {
 	double soFar = Double.parseDouble(terms[0]);
         for(int i = 0; i < terms.length; i++) {
 	    if(terms[i].equals("*")) {
-		double[] nums = {soFar, Double.parseDouble(terms[i+1])};
+		double[] nums = {Double.parseDouble(terms[i-1]), Double.parseDouble(terms[i+1])};
 		soFar = Double.parseDouble(multiply(nums));
 	    }
 	    else if(terms[i].equals("/")) {
-	    	soFar = Double.parseDouble(divide("" + soFar, terms[i+1]));
+	    	soFar = Double.parseDouble(divide(terms[i-1], terms[i+1]));
 	    }
 	}
 	for(int i = 0; i < terms.length; i++) {
@@ -163,12 +163,38 @@ public class Numbers {
 	return "" + d;
     }
 
-    public String poly(String x) {
-	Scanner s = new Scanner(x);
-	System.out.println(s.nextInt());
-	int[] f = {1, 2, 3};
-	int[] g = {2, 3, 4};
-	return addPoly(f, g);
+    public static String poly(String eqns, int a) {
+	int[] f = new int[4];
+	int[] g = new int[4];
+	f[0] = Integer.parseInt("" + eqns.charAt(0));
+	f[1] = Integer.parseInt("" + eqns.charAt(5));
+	f[2] = Integer.parseInt("" + eqns.charAt(10));
+	f[3] = Integer.parseInt("" + eqns.charAt(15));
+	g[0] = Integer.parseInt("" + eqns.charAt(17));
+	g[1] = Integer.parseInt("" + eqns.charAt(22));
+	g[2] = Integer.parseInt("" + eqns.charAt(27));
+	g[3] = Integer.parseInt("" + eqns.charAt(32));
+	/*
+	int i = 0;
+	int j = 0;
+	Scanner s = new Scanner(eqns);
+	while(s.hasNextInt()){
+	    if(i < 8 && (i%2 == 0 || i == 7)) {
+		f[j] = s.nextInt();
+		j++;
+	    }else if(i > 8 && (i%2 == 0 || i == 7)) {
+		g[j] = s.nextInt();
+		j++;
+	    }
+	    i++;
+	}
+	s.close();
+	*/
+	if(a == 0) {
+	    return addPoly(f, g);
+	}else{
+	    return subPoly(f, g);
+	}
     }
 
     //so far only works if theyre even in length

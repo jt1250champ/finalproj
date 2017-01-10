@@ -61,9 +61,9 @@ public class WolframAlpha extends JFrame implements ActionListener{
 		tester.setText(Numbers.arithmetic(user.substring(11,user.length())));	   
 	    }
 	    else if(user.length() > 9 && user.substring(0,8).equals("add poly")) {
-		System.out.println("recog");
+		//System.out.println("recog");
 		String eqns = user.substring(9, user.length());
-		System.out.println(eqns);
+		//System.out.println(eqns);
 		tester.setText(Numbers.poly(eqns, 0));
 	    }
 	    else if(user.length() > 13 && user.substring(0,12).equals("subtract poly")) {
