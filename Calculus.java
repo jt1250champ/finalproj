@@ -31,12 +31,8 @@ public class Calculus{
 	    }
 	}
 	return coef;
-    }
-    
-    private static String derOfPoly(String poly){
-	return "";
-    }
-    
+    }    
+
     public static String derivative(String f){
 	return "";
     }

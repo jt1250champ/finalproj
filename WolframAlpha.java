@@ -20,7 +20,6 @@ public class WolframAlpha extends JFrame implements ActionListener{
 
 	pane = this.getContentPane();
 	pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
-	//TODO MAKE KEYBOARD SHORTCUT WORK
 	JButton ent = new JButton("Enter");
         getRootPane().setDefaultButton(ent);
 	ent.addActionListener(this);
@@ -35,7 +34,7 @@ public class WolframAlpha extends JFrame implements ActionListener{
     }
 
     /* Already Written
-     * Arithmetic, as long as length is right
+     * Arithmetic kind of
      * Add and Subtract Polynomials
      * Prime Factorize
      * Convert Base

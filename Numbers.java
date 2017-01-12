@@ -164,16 +164,29 @@ public class Numbers {
     }
 
     public static String poly(String eqns, int a) {
-	int[] f = new int[4];
-	int[] g = new int[4];
-	f[0] = Integer.parseInt("" + eqns.charAt(0));
-	f[1] = Integer.parseInt("" + eqns.charAt(5));
-	f[2] = Integer.parseInt("" + eqns.charAt(10));
-	f[3] = Integer.parseInt("" + eqns.charAt(15));
-	g[0] = Integer.parseInt("" + eqns.charAt(17));
-	g[1] = Integer.parseInt("" + eqns.charAt(22));
-	g[2] = Integer.parseInt("" + eqns.charAt(27));
-	g[3] = Integer.parseInt("" + eqns.charAt(32));
+	ArrayList<String> powers = new ArrayList<String>();
+	for (int i = 0; i < poly.length(); i++){
+	    if (poly.charAt(i) == '^'){
+		powers.add("" + poly.charAt(i + 1));
+	    }
+	}
+	int highestPower = 0;
+	for (int i = 0; i < powers.size(); i ++){
+	    if (Integer.parseInt(powers.get(i)) > highestPower){
+		highestPower = Integer.parseInt(powers.get(i));
+	    }
+	}
+
+	int[] coeffs = new int[highestPower+ 1];
+	for (int i = 0; i < coeffs.length; i++) {
+	    if(poly.charAt(i) == 'x') {
+		int iHateBigNums = 0;
+		while(iHateBigNums 
+	        int index = Integer.parseInt("" + poly.charAt(i-1));
+	    }
+
+	}
+
 	/*
 	int i = 0;
 	int j = 0;
